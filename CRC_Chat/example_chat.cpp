@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 class Time
 {
     private:
@@ -19,7 +20,7 @@ class Time
 class Date
 {
     private:
-        int day:
+        int day;
         int month;
         int year;
     public:
@@ -37,7 +38,7 @@ class Message
         Date date;
         Time time;
         bool received;
-        char message[1024]
+        char message[1024];
        
     public:
             Message(void) {strcpy(message,"");
@@ -50,13 +51,13 @@ class Message
                              
                              
         bool isReceived(void) {return received;}
-        int getText(chat t[]) {
+        int getText(char t[]) {
                                 strcpy(t, message);
                                 return strlen(t);
                               }
        
         void setDate(Date d)  {date=d;}
-        void setTime(Time r) {time=t;}
+        void setTime(Time r) {time=r;}
         void setReceived(bool r){received=r;}
         void setText(char t[]){strcpy(message, t);}
        

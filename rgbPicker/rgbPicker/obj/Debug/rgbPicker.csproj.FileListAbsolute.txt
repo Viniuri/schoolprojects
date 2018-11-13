@@ -1,0 +1,10 @@
+c:\users\vermafamily\source\repos\rgbPicker\rgbPicker\bin\Debug\rgbPicker.exe.config
+c:\users\vermafamily\source\repos\rgbPicker\rgbPicker\bin\Debug\rgbPicker.exe
+c:\users\vermafamily\source\repos\rgbPicker\rgbPicker\bin\Debug\rgbPicker.pdb
+c:\users\vermafamily\source\repos\rgbPicker\rgbPicker\obj\Debug\rgbPicker.csprojResolveAssemblyReference.cache
+c:\users\vermafamily\source\repos\rgbPicker\rgbPicker\obj\Debug\rgbPicker.Form1.resources
+c:\users\vermafamily\source\repos\rgbPicker\rgbPicker\obj\Debug\rgbPicker.Properties.Resources.resources
+c:\users\vermafamily\source\repos\rgbPicker\rgbPicker\obj\Debug\rgbPicker.csproj.GenerateResource.cache
+c:\users\vermafamily\source\repos\rgbPicker\rgbPicker\obj\Debug\rgbPicker.csproj.CoreCompileInputs.cache
+c:\users\vermafamily\source\repos\rgbPicker\rgbPicker\obj\Debug\rgbPicker.exe
+c:\users\vermafamily\source\repos\rgbPicker\rgbPicker\obj\Debug\rgbPicker.pdb

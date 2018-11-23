@@ -110,6 +110,7 @@
             this.labelColor.Name = "labelColor";
             this.labelColor.Size = new System.Drawing.Size(607, 151);
             this.labelColor.TabIndex = 6;
+            this.labelColor.Click += new System.EventHandler(this.labelColor_Click);
             // 
             // rgbTextbox
             // 

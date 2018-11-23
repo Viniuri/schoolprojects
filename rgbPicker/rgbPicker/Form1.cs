@@ -14,17 +14,18 @@ namespace rgbPicker
     {
         public Form1()
         {
-            InitializeComponent();
+            /*InitializeComponent();
             Timer timer = new Timer();
             timer.Tick += new EventHandler(getColor); // Everytime timer ticks, timer_Tick will be called
             timer.Interval = (10);             // Timer will tick evert 1 seconds
             timer.Enabled = true;                       // Enable the timer
             timer.Start();                              // Start the timer
+            */
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            getColor();
         }
         private void getColor(object sender, EventArgs e)
         {
@@ -37,6 +38,11 @@ namespace rgbPicker
             redLabel.ForeColor = Color.FromArgb(redValue, greenValue, blueValue);//(R, G, B) (0, 0, 0 = black)
             greenLabel.ForeColor = Color.FromArgb(redValue, greenValue, blueValue);//(R, G, B) (0, 0, 0 = black)
             blueLabel.ForeColor = Color.FromArgb(redValue, greenValue, blueValue);//(R, G, B) (0, 0, 0 = black)
+        }
+
+        private void labelColor_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

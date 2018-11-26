@@ -5,9 +5,9 @@ using namespace std;
 class Time
 {
     public:
-    int ora = ...; //Assegna automaticamente ora e minuti
-    int minuti = ...;
-}
+    //int ora = ...; //Assegna automaticamente ora e minuti
+    //int minuti = ...;
+};
 
 class Automobile
 {
@@ -17,10 +17,10 @@ class Automobile
         int OraEntrata;
         int MinutiEntrata;
     public:
-        string targa {get {return Targa;} set {Targa = value;}}
-        int postoAssegnato {get {return PostoAssegnato;} set {PostoAssegnato = value;}}
-        int oraEntrata {get {return OraEntrata;} set {OraEntrata = Time.ora}}
-        int minutiEntrata {get {return MinutiEntrata;} set {MinutiEntrata = Time.minuti}}
+        string targa {get {return Targa;} set {Targa = value;}};
+        int postoAssegnato {get {return PostoAssegnato;} set {PostoAssegnato = value;}};
+        int oraEntrata {get {return OraEntrata;} set {OraEntrata = Time.ora}};
+        int minutiEntrata {get {return MinutiEntrata;} set {MinutiEntrata = Time.minuti}};
         Automobile(string t)
         {
             this.targa = t;
@@ -28,7 +28,7 @@ class Automobile
         void occupaPosto(int p) {}
         void liberaPosto() {}
         void pagaCosto(int c) {}
-}
+};
 
 class Parcheggio
 {
@@ -40,7 +40,7 @@ class Parcheggio
     int fornirePostoLibero() {return 0;}
     int fornireCosto() {return 0;}
     string comunicaErrore() {}
-}
+};
 
 class GestoreParcheggio
 {
@@ -52,7 +52,7 @@ class GestoreParcheggio
         bool PostoLibero;
         int incasso {get {return Incasso;} set {Incasso = value;}}
         void salvareDatiSuFile()
-}
+};
 
 int main()
 {

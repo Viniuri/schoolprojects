@@ -5,3 +5,7 @@ C:\Users\1141986\source\repos\threadExample\threadExample\obj\Debug\threadExampl
 C:\Users\1141986\source\repos\threadExample\threadExample\obj\Debug\threadExample.csproj.CoreCompileInputs.cache
 C:\Users\1141986\source\repos\threadExample\threadExample\obj\Debug\threadExample.exe
 C:\Users\1141986\source\repos\threadExample\threadExample\obj\Debug\threadExample.pdb
+C:\Users\1141986\Desktop\schoolprojects\Informatica\threadExample\threadExample\obj\Debug\threadExample.csprojAssemblyReference.cache
+C:\Users\1141986\Desktop\schoolprojects\Informatica\threadExample\threadExample\obj\Debug\threadExample.csproj.CoreCompileInputs.cache
+C:\Users\1141986\Desktop\schoolprojects\Informatica\threadExample\threadExample\obj\Debug\threadExample.exe
+C:\Users\1141986\Desktop\schoolprojects\Informatica\threadExample\threadExample\obj\Debug\threadExample.pdb

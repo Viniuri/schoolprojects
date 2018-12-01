@@ -205,7 +205,7 @@ int main(void)
                             {
                                 cout<<"Importo: ";
                                 cout<<importo;
-                                cout<<"\n";
+                                cout<<" Euro\n";
                             }
                             break;
                 case 4:		

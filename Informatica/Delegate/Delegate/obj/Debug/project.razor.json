@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\VermaFamily\\Desktop\\schoolprojects\\Informatica\\Delegate\\Delegate\\Delegate.csproj",
+  "TargetFramework": "v4.6.1",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}

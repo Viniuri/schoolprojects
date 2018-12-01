@@ -28,8 +28,8 @@ class Barca {
 
 class Porto {
     public:
-    const float tariffa_Vela = 10;
-    const float tariffa_Motore = 20;
+    const int tariffa_Vela = 10;
+    const int tariffa_Motore = 20;
     Barca barche[100];
     bool occupato[100];
     Porto(void) {
@@ -84,13 +84,13 @@ class Porto {
     	}
     	if (barche[i-1].vela == true)
     	{
+    		occupato[i-1] = false;
         	return giorni*tariffa_Vela*barche[i-1].lunghezza;
-        	occupato[i-1] = false;
     	}
     	else
     	{
+    		occupato[i-1] = false;
         	return giorni*tariffa_Motore*barche[i-1].stazza;
-        	occupato[i-1] = false;
     	}
     }
 
@@ -103,19 +103,58 @@ class Porto {
         }
         return barche[i-1];
     }
+    int ricercaSpecifica(int minimo, int massimo, Barca barche[])
+	{
+		int n[100];
+		int c = 0;
+		for (int i=1; i<=100; i++)
+		{
+			if (occupato[i-1] == true)
+	    	{
+				if (barche[i-1].lunghezza >= minimo && barche[i-1].lunghezza <= massimo)
+		    	{
+					n[c] = i-1;
+					c++;
+		    	}
+		    }
+		}
+		for(int i = 0; i < sizeof(n)/sizeof(n[0]); i++)
+		{
+			if(n[i] == 0)
+			{
+				i = 100;
+			}
+			else
+			{
+				print(n[i], barche);
+			}
+		}
+		return 0;
+	}
+	void print(int n, Barca barche[])
+	{
+		cout<<"Informazioni riguardanti la barca: Nome -> " + barche[n].nome + ", Nazionalita' -> " + barche[n].nazionalita;
+        cout<<", Lunghezza -> ";
+        cout<<barche[n].lunghezza;
+    	cout<<", Stazza -> ";
+        cout<<barche[n].stazza;
+        cout<<"\n";
+	}
 };
 int main(void)
 {
     Porto porto;
     Barca barca, barche[100];
-    int scelta, i, n , posto, giorni, importo;
+    int scelta, i, n , posto, giorni, importo, minimo, massimo;
+    int nBarche[100];
     float lunghezza, stazza;
     string nome, nazionalita, tipo;
     do {
-        cout<<"Premi 1 per parcheggiare le tua barca a MOTORE\n";
-        cout<<"Premi 2 per parcheggiare le tua barca a VELA\n";
+        cout<<"Premi 1 per parcheggiare la tua barca a MOTORE\n";
+        cout<<"Premi 2 per parcheggiare la tua barca a VELA\n";
         cout<<"Premi 3 per terminare la sosta nel parcheggio\n";
         cout<<"Premi 4 per cercare informazioni su una BARCA\n";
+        cout<<"Premi 5 per cercare informazioni su BARCHE aventi una determinata lunghezza MINIMA e MASSIMA\n";
         cout<<"Scelta: ";
         cin>>scelta;
         switch (scelta)
@@ -160,26 +199,36 @@ int main(void)
                             importo = porto.liberaPosto(posto, giorni);
                             if(importo == 0)
                             {
-                            cout<<"Questo posto e' gia libero, non puo' essere il suo!!!\n";
+                            cout<<"\nQuesto posto e' gia libero, non puo' essere il suo!!!\n";
                             }
                             else
                             {
-                                cout<<"Importo: " + importo;
+                                cout<<"Importo: ";
+                                cout<<importo;
+                                cout<<"\n";
                             }
                             break;
                 case 4:		
                             cout<<"In quale posto si trova la barca -> "; cin>>posto;
                             barca = porto.ricercaInfo(posto);
-                            if (barca.stazza == 0)
+                            if (barca.lunghezza == 0)
                             {
-                                cout<<"Questo posto è libero, non può essere il suo!!!\n";
+                                cout<<"Questo posto e' gia libero, non puo' essere il suo!!!\n";
                             }
                             else
                             {
-                                cout<<"Informazioni riguardanti la barca" + barca.nome + ", " + barca.nazionalita;
-                                //cout<<" " + barca.lunghezza + ", " + barca.stazza;
+                                cout<<"Informazioni riguardanti la barca: Nome -> " + barca.nome + ", Nazionalita' -> " + barca.nazionalita;
+                                cout<<", Lunghezza -> ";
+                                cout<<barca.lunghezza;
+                                cout<<", Stazza -> ";
+                                cout<<barca.stazza;
+                                cout<<"\n";
                             }
                             break;
+                case 5:		cout<<"Lunghezza minima -> "; cin>>minimo;
+							cout<<"Lunghezza massima -> "; cin>>massimo;
+							porto.ricercaSpecifica(minimo, massimo, barche);
+						break;           
                 default:break;
             }
     }while (scelta!=0);

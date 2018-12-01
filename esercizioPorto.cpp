@@ -118,27 +118,14 @@ class Porto {
 		    	}
 		    }
 		}
-		for(int i = 0; i < sizeof(n)/sizeof(n[0]); i++)
+		cout<<"Le barche che hai richiesto si trovano nelle seguenti posizioni\n";
+		cout<<n[0];
+		for(int i = 0; i < c; i++)
 		{
-			if(n[i] == 0)
-			{
-				i = 100;
-			}
-			else
-			{
-				print(n[i], barche);
-			}
+			cout<<i<<". "<<n[i]<<"\n";
 		}
+		cout<<"Premi 4 nel menu' per cercare informazioni sulle barche inserendo il loro POSTO\n";
 		return 0;
-	}
-	void print(int n, Barca barche[])
-	{
-		cout<<"Informazioni riguardanti la barca: Nome -> " + barche[n].nome + ", Nazionalita' -> " + barche[n].nazionalita;
-        cout<<", Lunghezza -> ";
-        cout<<barche[n].lunghezza;
-    	cout<<", Stazza -> ";
-        cout<<barche[n].stazza;
-        cout<<"\n";
 	}
 };
 int main(void)
@@ -231,5 +218,6 @@ int main(void)
 						break;           
                 default:break;
             }
-    }while (scelta!=0);
+    }
+	while (scelta!=0);
 }

@@ -34,7 +34,7 @@ class Porto {
     Porto(void) {
         for(int i=0; i < 100; i++) //Scorro tutto l'array
         { 
-            occupato[i] = false; //Posti all'inizio non occupati, cioè false
+            occupato[i] = false; //Posti all'inizio non occupati, cioï¿½ false
         }
     };
     //Parcheggio barca
@@ -96,7 +96,7 @@ class Porto {
     Barca ricercaInfo(int i)
     {
         Barca barca; //Utilizzo il costruttore di default per assegnare una lunghezza e stazza uguale a zero
-        if ((occupato[i-1] == false) || (i<=0 || i>= 100)) //Controllo per vedere se è sbagliato il posto fornito
+        if ((occupato[i-1] == false) || (i<=0 || i>= 100)) //Controllo per vedere se ï¿½ sbagliato il posto fornito
         {
             return barca;
         }
@@ -113,7 +113,15 @@ class Porto {
 		    	{
 					cout<<c<<". POSTO["<<i<<"] -> ";
 					cout<<"Informazioni riguardanti la barca: Nome -> " + barche[i-1].nome + ", Nazionalita' -> " + barche[i-1].nazionalita;
-            		cout<<", Lunghezza -> "<<barche[i-1].lunghezza<<", Stazza -> "<<barche[i-1].stazza<<"\n";
+            		cout<<", Lunghezza -> "<<barche[i-1].lunghezza<<", Stazza -> "<<barche[i-1].stazza;
+            		if(barche[i-1].vela == true)
+                    {
+                        cout<<", Tipologia -> Vela\n";
+					}
+					else
+					{
+						cout<<", Tipologia -> Motore\n";
+					}
             		c++;
 		    	}
 		    }
@@ -148,9 +156,7 @@ int main(void)
                             }
                             else
                             {
-                                cout<<"\nAssegnato il : ";
-                                cout<<posto;
-                                cout<<" posto\n";
+                                cout<<"Assegnato il : "<<posto<<" posto\n";
                                 barche[posto] = barca;
                             }
                             break;
@@ -166,9 +172,7 @@ int main(void)
                             }
                             else
                             {
-                                cout<<"\nAssegnato il : ";
-                                cout<<posto;
-                                cout<<" posto\n";
+                                cout<<"Assegnato il : "<<posto<<" posto\n";
                                 barche[posto] = barca;
                             }
                             break;
@@ -182,9 +186,7 @@ int main(void)
                             }
                             else
                             {
-                                cout<<"Importo: ";
-                                cout<<importo;
-                                cout<<" Euro\n";
+                                cout<<"Importo: "<<importo<<" Euro\n";
                             }
                             break;
                 case 4:	//Ricerca info su una barca	
@@ -197,7 +199,15 @@ int main(void)
                             else
                             {
                                 cout<<"Informazioni riguardanti la barca: Nome -> " + barca.nome + ", Nazionalita' -> " + barca.nazionalita;
-                                cout<<", Lunghezza -> "<<barca.lunghezza<<", Stazza -> "<<barca.stazza<<"\n";
+                                cout<<", Lunghezza -> "<<barca.lunghezza<<", Stazza -> "<<barca.stazza;
+                                if(barca.vela == true)
+                                {
+                                	cout<<", Tipologia -> Vela\n";
+								}
+								else
+								{
+									cout<<", Tipologia -> Motore\n";
+								}
                             }
                             break;
                 case 5:	//Ricerca barche dando un range minimo e massimo di lunghezza	

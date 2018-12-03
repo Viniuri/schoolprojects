@@ -2,13 +2,8 @@ class Rfid {
     private:
     //Variabili private
     public:
-        int codiceNumericoId;
-        string descrizione;
-        int giornoScadenza;
-        int meseScadenza;
-        int annoScadenza;
-        string tipologia;
-        int numeroPorzioni;
+        int codiceNumericoId, giornoScadenza, meseScadenza, annoScadenza, numeroPorzioni;
+        string descrizione, tipologia;
         //Costruttore di default
         Rfid(void) {
             codiceNumericoId = 0;
@@ -56,5 +51,6 @@ class Frigorifero {
 int main(int argc, char const *argv[])
 {
     Frigorifero frigorifero;
+    Prodotto prodotto, prodotti[50];
     return 0;
 }

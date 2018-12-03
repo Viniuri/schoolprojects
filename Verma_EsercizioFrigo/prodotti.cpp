@@ -53,3 +53,8 @@ class Frigorifero {
             }
         }
 };
+int main(int argc, char const *argv[])
+{
+    Frigorifero frigorifero;
+    return 0;
+}

@@ -46,6 +46,7 @@ class Prodotto : Rfid{
     //Ogni prodotto ha una tag RFID
     Rfid tagRfid;
     string nome;
+    int posto;
     public:
         Prodotto(void) {
             tagRfid = Rfid();
@@ -70,7 +71,7 @@ class Frigorifero {
                 occupato[i] = false; //Quando vai a scrivere la funzione del prodotto che va ad occupato un posto
             }						//Metti occupato come true ed aggiorni Prodotto prodotti[50]
         }
-        int occupaPosto(Prodotto prodotto){
+        int inserisciP(Prodotto prodotto){
 		    for (int i=0; i<50; i++) {
 		        if (occupato[i] == false) {
 		            prodotti[i] = prodotto;
@@ -79,7 +80,21 @@ class Frigorifero {
 		        }
 		    }
 		    return -1; // nessun posto libero per barche a vela
-		}	
+		}
+        /*
+        int liberaP(Prodotto prodotto) {
+            if (prodotto.posto<=0 || prodotto.posto>= 50) {
+                return 0;
+            }
+            if (occupato[prodotto.posto] == false) {
+                return 0;
+            }
+            else {
+    	        occupato[prodotto.posto] = false;
+            }
+        }
+        */
+}	
 };
 int main(int argc, char const *argv[])
 {
@@ -104,14 +119,15 @@ int main(int argc, char const *argv[])
 				cout<<"Inserisci la tipologia del prodotto: ";cin>>tipo;
 				cout<<"Inserisci il numero delle porzioni del prodotto: ";cin>>nP;
 				p = Prodotto(nome, cId, descr, giorno, mese, anno, cal, tipo, nP);
-				if ((posto = frigorifero.occupaPosto(p)) < 0)
+				if ((posto = frigorifero.inserisciP(p)) < 0)
                 {
-                	cout<<"Il frigorifero è pieno!\n";
+                	cout<<"Il frigorifero ï¿½ pieno!\n";
                 }
             	else
                 {
                     cout<<"Prodotto inserito correttamente nel frigorifero\n";
                     prodotti[posto] = p;
+                    p.posto = posto;
                 }
 				break;
 			case 2:	
@@ -123,14 +139,15 @@ int main(int argc, char const *argv[])
 				cout<<"ANNO: ";cin>>anno;
 				cout<<"Inserisci le calorie del prodotto: ";cin>>cal;
 				p = Prodotto(nome, cId, descr, giorno, mese, anno, cal);
-				if ((posto = frigorifero.occupaPosto(p)) < 0)
+				if ((posto = frigorifero.inserisciP(p)) < 0)
                 {
-                	cout<<"Il frigorifero è pieno";
+                	cout<<"Il frigorifero ï¿½ pieno";
                 }
             	else
                 {
                     cout<<"Prodotto inserito correttamente nel frigo";
                     prodotti[posto] = p;
+                    p.posto = posto;
                 }
 				break;		
 		}

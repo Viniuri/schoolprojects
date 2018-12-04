@@ -1,0 +1,7 @@
+C:\Users\1141986\source\repos\EventHandlerDelegate\EventHandlerDelegate\bin\Debug\EventHandlerDelegate.exe.config
+C:\Users\1141986\source\repos\EventHandlerDelegate\EventHandlerDelegate\bin\Debug\EventHandlerDelegate.exe
+C:\Users\1141986\source\repos\EventHandlerDelegate\EventHandlerDelegate\bin\Debug\EventHandlerDelegate.pdb
+C:\Users\1141986\source\repos\EventHandlerDelegate\EventHandlerDelegate\obj\Debug\EventHandlerDelegate.csprojAssemblyReference.cache
+C:\Users\1141986\source\repos\EventHandlerDelegate\EventHandlerDelegate\obj\Debug\EventHandlerDelegate.csproj.CoreCompileInputs.cache
+C:\Users\1141986\source\repos\EventHandlerDelegate\EventHandlerDelegate\obj\Debug\EventHandlerDelegate.exe
+C:\Users\1141986\source\repos\EventHandlerDelegate\EventHandlerDelegate\obj\Debug\EventHandlerDelegate.pdb

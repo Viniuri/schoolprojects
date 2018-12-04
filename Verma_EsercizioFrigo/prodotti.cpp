@@ -3,10 +3,9 @@
 #include <math.h>
 #include <stdlib.h>
 #include <cstdio>
+#include <time.h>
 using namespace std;
 class Rfid {
-    private:
-    //Variabili private
     public:
         int codiceNumericoId, giornoScadenza, meseScadenza, annoScadenza, calorie, numeroPorzioni;
         string descrizione, tipologia;
@@ -42,12 +41,12 @@ class Rfid {
             calorie = cal;
         }
 };
-class Prodotto : Rfid{
+class Prodotto : public Rfid{
     //Ogni prodotto ha una tag RFID
-    Rfid tagRfid;
-    string nome;
-    int posto;
     public:
+    	Rfid tagRfid;
+    	int posto;
+    	string nome;
         Prodotto(void) {
             tagRfid = Rfid();
         }
@@ -59,10 +58,24 @@ class Prodotto : Rfid{
         Prodotto(string n, int cId, string descr, int giorniS, int meseS, int annoS, int cal) : Rfid(cId, descr, giorniS, meseS, annoS, cal) {
             nome = n;
         }
+        bool scaduto(int giorno, int mese, int anno)
+		{
+			if (anno > annoScadenza)
+				return true;
+			if (anno < annoScadenza)
+				return false;
+			// data.anno == scadenza.anno
+			if (mese > meseScadenza)
+				return true;
+			if (mese < meseScadenza)
+				return false;
+		 	// data.mese == scadenza.mese
+			if (giorno > giornoScadenza)
+				return true;
+		 return false;
+	 	}
 };
 class Frigorifero {
-    private:
-    //Variabili private
     public:
         Prodotto prodotti[50];
         bool occupato[50];
@@ -81,30 +94,65 @@ class Frigorifero {
 		    }
 		    return -1; // nessun posto libero per barche a vela
 		}
-        /*
-        int liberaP(Prodotto prodotto) {
-            if (prodotto.posto<=0 || prodotto.posto>= 50) {
-                return 0;
-            }
-            if (occupato[prodotto.posto] == false) {
-                return 0;
-            }
-            else {
-    	        occupato[prodotto.posto] = false;
-            }
+        bool liberaP(int codiceId, int g, int m, int a) {
+			for(int i=0; i < 50; i++) {
+				if((prodotti[i].codiceNumericoId == codiceId) && (prodotti[i].giornoScadenza == g && prodotti[i].meseScadenza == m && prodotti[i].annoScadenza == a)) {
+					prodotti[i] = Prodotto();
+					occupato[i] = false;
+					return true;
+				}
+			}
+			return false;	
         }
-        */
-}	
+        void stampaTutto() {
+        	for(int i=0; i < 50; i++) {
+        		cout<<i<<") "<<prodotti[i].nome<<" - ";
+        		if(i != 0 &&i % 10 == 0) {
+        			cout<<"\n";
+				}
+			}
+			cout<<"\n";
+		}
+		void stampaScaduti(int g, int m, int a) {
+        	for(int i=0; i < 50; i++) {
+        		if(prodotti[i].scaduto(g, m, a)) {
+        		cout<<i<<") "<<prodotti[i].nome<<" - ";
+        			if(i != 0 &&i % 10 == 0) {
+        				cout<<"\n";
+					}
+				}
+			}
+			cout<<"\n";
+		}
+		int quantiProdotti(int codiceId) {
+			int n = 0;
+			for(int i=0; i < 50; i++) {
+				if(prodotti[i].codiceNumericoId == codiceId) {
+					n++;
+				}
+			}
+			return n;
+		}
 };
 int main(int argc, char const *argv[])
 {
     Frigorifero frigorifero;
     Prodotto p, prodotti[50];
-    int scelta, cId, giorno, mese, anno, cal, nP, posto;
+    int scelta, cId, giorno, mese, anno, cal, nP, posto, n;
+    int giornoOggi, meseOggi, annoOggi;
     string nome, descr, tipo;
+    time_t t = time(NULL);
+	struct tm tm = *localtime(&t);
+	annoOggi = tm.tm_year + 1900;
+	meseOggi = tm.tm_mon + 1;
+	giornoOggi = tm.tm_mday;
     do{
     	cout<<"Premi [1] per inserire un prodotto PRECOTTO nel frigorifero\n";
     	cout<<"Premi [2] per inserire un prodotto NON-PRECOTTO nel frigorifero\n";
+    	cout<<"Premi [3] per prelevare un prodotto dal frigorifero\n";
+    	cout<<"Premi [4] per stampare tutti i prodotti presenti nel frigorifero\n";
+    	cout<<"Premi [5] per stampare tutti i prodotti scaduti presenti nel frigorifero\n";
+    	cout<<"Premi [6] per stampare quante confezioni  di prodotti sono presenti nel frigorifero, dato il codice identificativo\n";
     	cout<<"Scelta ->> ";cin>>scelta;
     	switch(scelta)
     	{
@@ -116,7 +164,7 @@ int main(int argc, char const *argv[])
 				cout<<"MESE: ";cin>>mese;
 				cout<<"ANNO: ";cin>>anno;
 				cout<<"Inserisci le calorie del prodotto: ";cin>>cal;
-				cout<<"Inserisci la tipologia del prodotto: ";cin>>tipo;
+				cout<<"Inserisci la tipologia del prodotto(antipasto, primo , secondo, contorno, dolce): ";cin>>tipo;
 				cout<<"Inserisci il numero delle porzioni del prodotto: ";cin>>nP;
 				p = Prodotto(nome, cId, descr, giorno, mese, anno, cal, tipo, nP);
 				if ((posto = frigorifero.inserisciP(p)) < 0)
@@ -149,7 +197,29 @@ int main(int argc, char const *argv[])
                     prodotti[posto] = p;
                     p.posto = posto;
                 }
-				break;		
+				break;
+			case 3:
+				cout<<"Inserisci il codice identificativo del prodotto -> ";cin>>cId;
+				cout<<"Inserisci la data di scadenza del prodotto, del quale hai fornito il codice identificativo,\nGIORNO: ";cin>>giorno;
+				cout<<"MESE: ";cin>>mese;
+				cout<<"ANNO: ";cin>>anno;
+				if(frigorifero.liberaP(cId, giorno, mese, anno)) {
+					cout<<"Prodotto prelevato correttamente dal frigorifero\n";
+				}
+				else {
+					cout<<"Inserisci un codice ESISTENTE!\n";
+				}
+				break;
+			case 4:
+				frigorifero.stampaTutto();
+				break;
+			case 5:
+				frigorifero.stampaScaduti(giornoOggi, meseOggi, annoOggi);
+				break;
+			case 6:
+				cout<<"Inserisci il codice identificativo del prodotto -> ";cin>>cId;
+				n = frigorifero.quantiProdotti(cId);
+				cout<<"Sono presenti "<<n<<" confezioni nel frigorifero!\n";
 		}
 	}while(scelta!=0);
     return 0;

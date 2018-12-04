@@ -60,18 +60,21 @@ class Prodotto : public Rfid{
         }
         bool scaduto(int giorno, int mese, int anno)
 		{
-			if (anno > annoScadenza)
+			if (anno > annoScadenza) {
 				return true;
-			if (anno < annoScadenza)
+			}
+			if (anno < annoScadenza) {
 				return false;
-			// data.anno == scadenza.anno
-			if (mese > meseScadenza)
+			}
+			if (mese > meseScadenza) {
 				return true;
-			if (mese < meseScadenza)
+			}
+			if (mese < meseScadenza) {
 				return false;
-		 	// data.mese == scadenza.mese
-			if (giorno > giornoScadenza)
+			}
+			if (giorno > giornoScadenza) {
 				return true;
+			}
 		 return false;
 	 	}
 };
@@ -81,8 +84,8 @@ class Frigorifero {
         bool occupato[50];
         Frigorifero(void) {
             for(int i = 0;i < 50; i++) {
-                occupato[i] = false; //Quando vai a scrivere la funzione del prodotto che va ad occupato un posto
-            }						//Metti occupato come true ed aggiorni Prodotto prodotti[50]
+                occupato[i] = false;
+            }						
         }
         int inserisciP(Prodotto prodotto){
 		    for (int i=0; i<50; i++) {
@@ -92,7 +95,7 @@ class Frigorifero {
 		            return i;
 		        }
 		    }
-		    return -1; // nessun posto libero per barche a vela
+		    return -1; // nessun posto libero all'interno del frigorifero
 		}
         bool liberaP(int codiceId, int g, int m, int a) {
 			for(int i=0; i < 50; i++) {
@@ -169,7 +172,7 @@ int main(int argc, char const *argv[])
 				p = Prodotto(nome, cId, descr, giorno, mese, anno, cal, tipo, nP);
 				if ((posto = frigorifero.inserisciP(p)) < 0)
                 {
-                	cout<<"Il frigorifero � pieno!\n";
+                	cout<<"Il frigorifero e' pieno!\n";
                 }
             	else
                 {
@@ -189,11 +192,11 @@ int main(int argc, char const *argv[])
 				p = Prodotto(nome, cId, descr, giorno, mese, anno, cal);
 				if ((posto = frigorifero.inserisciP(p)) < 0)
                 {
-                	cout<<"Il frigorifero � pieno";
+                	cout<<"Il frigorifero e' pieno";
                 }
             	else
                 {
-                    cout<<"Prodotto inserito correttamente nel frigo";
+                    cout<<"Prodotto inserito correttamente nel frigo\n";
                     prodotti[posto] = p;
                     p.posto = posto;
                 }

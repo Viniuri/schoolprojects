@@ -11,7 +11,8 @@ namespace Delegate
         /*Nell'esempio seguente viene dichiarato un delegato denominato 
         [Del] che può incapsulare un metodo che accetta una stringa come argomento e restituisce void*/
         public delegate void Del(string message);
-        public delegate void Somma(int n, int n1);
+        public delegate int Somma(int n, int n1);
+        public delegate int sottrazione(int n, int n1);
         // Create a method for a delegate
         //Del
         public static void DelegateMethod(string message)
@@ -19,17 +20,22 @@ namespace Delegate
             System.Console.WriteLine(message);
         }
         //Somma
-        public static void DelegateSomma(int n, int n1)
+        public static int DelegateSomma(int n, int n1)
         {
-            System.Console.WriteLine(n + n1);
+            return(n + n1);
+        }
+        public static  int DelegateSottr(int n,int n1)
+        {
+            return n - n1;
         }
         static void Main(string[] args)
         {
             // Instantiate the delegate.
             Del handler = DelegateMethod;
             Somma sum = DelegateSomma;
+            sottrazione Sottrazione = DelegateSottr;
             handler("Test");
-            sum(1, 2);
+            int ris = sum(1, 2);
             Message m = new Message();
             m.Print("Message sent");
             System.Console.ReadLine();

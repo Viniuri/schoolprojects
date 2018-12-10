@@ -1,0 +1,7 @@
+C:\Users\1141986\source\repos\VerificaEventiDelegati\VerificaEventiDelegati\bin\Debug\VerificaEventiDelegati.exe.config
+C:\Users\1141986\source\repos\VerificaEventiDelegati\VerificaEventiDelegati\bin\Debug\VerificaEventiDelegati.exe
+C:\Users\1141986\source\repos\VerificaEventiDelegati\VerificaEventiDelegati\bin\Debug\VerificaEventiDelegati.pdb
+C:\Users\1141986\source\repos\VerificaEventiDelegati\VerificaEventiDelegati\obj\Debug\VerificaEventiDelegati.csprojAssemblyReference.cache
+C:\Users\1141986\source\repos\VerificaEventiDelegati\VerificaEventiDelegati\obj\Debug\VerificaEventiDelegati.csproj.CoreCompileInputs.cache
+C:\Users\1141986\source\repos\VerificaEventiDelegati\VerificaEventiDelegati\obj\Debug\VerificaEventiDelegati.exe
+C:\Users\1141986\source\repos\VerificaEventiDelegati\VerificaEventiDelegati\obj\Debug\VerificaEventiDelegati.pdb

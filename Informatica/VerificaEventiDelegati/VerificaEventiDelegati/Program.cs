@@ -23,6 +23,7 @@ namespace VerificaEventiDelegati
         {
             int ris, n1, n2;
             Somma somma = DelegateSomma;
+            ///ripristina
             Console.WriteLine("Digiti il primo numero");
             n1 = int.Parse(Console.ReadLine());
             Console.WriteLine("Digiti il secondo numero");

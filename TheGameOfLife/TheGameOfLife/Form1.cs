@@ -32,7 +32,7 @@ namespace TheGameOfLife
         public void randomSpawn()
         {
             PictureBox pCarrot;
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 5; i++)
             {
                 pCarrot = new PictureBox();
                 pCarrot.Image = Image.FromFile("C:/TGOL/carrot.png");
@@ -45,7 +45,7 @@ namespace TheGameOfLife
                 this.CEv[r, c] = new CCarota(r, c); 
             }
             PictureBox pRabbit;
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 5; i++)
             {
                 pRabbit = new PictureBox();
                 pRabbit.Image = Image.FromFile("C:/TGOL/rabbit.png");
@@ -57,7 +57,7 @@ namespace TheGameOfLife
                 this.CEv[r, c] = new CConiglio(r, c);
             }
             PictureBox pFox;
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 5; i++)
             {
                 pFox = new PictureBox();
                 pFox.Image = Image.FromFile("C:/TGOL/fox.png");
@@ -106,29 +106,28 @@ namespace TheGameOfLife
             int CimgSelected = table.GetColumn((PictureBox)sender);
             int RimgSelected = table.GetRow((PictureBox)sender);
             Where(RimgSelected, CimgSelected);
-            MessageBox.Show(RimgSelected.ToString() + "," + CimgSelected.ToString());
         }
         private void Where(int r, int c)
         {
             Control img = table.GetControlFromPosition(c, r);
-            table.Controls.Remove(img);
-            int r1 = GetRandomNumber(-2, 2);
-            int c1 = GetRandomNumber(-2, 2);
+            table.Controls.Remove(img); 
+            int r1 = GetRandomNumber(-1, 1);
+            int c1 = GetRandomNumber(-1, 1);
             r = r + r1;
             c = c + c1;
-            if(r<0)
+            if (r < 0)
             {
                 r = 0;
             }
-            if(r>10)
+            if (r > 10)
             {
                 r = 10;
             }
-            if(c<0)
+            if (c < 0)
             {
                 c = 0;
             }
-            if(c>10)
+            if (c > 10)
             {
                 c = 10;
             }

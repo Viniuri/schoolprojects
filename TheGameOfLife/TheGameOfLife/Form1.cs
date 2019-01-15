@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace TheGameOfLife
 {
@@ -17,6 +18,11 @@ namespace TheGameOfLife
         public Form1()
         {
             InitializeComponent();
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                               ControlStyles.UserPaint |
+                               ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             randomSpawn();
         }
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -26,19 +32,20 @@ namespace TheGameOfLife
         public void randomSpawn()
         {
             PictureBox pCarrot;
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 1; i++)
             {
                 pCarrot = new PictureBox();
                 pCarrot.Image = Image.FromFile("C:/TGOL/carrot.png");
                 pCarrot.Size = new Size(table.Width / 10, table.Height / 10);
                 pCarrot.SizeMode = PictureBoxSizeMode.StretchImage;
+                pCarrot.Enabled = false;
                 int r = GetRandomNumber(0, 10);
                 int c = GetRandomNumber(0, 10);
                 table.Controls.Add(pCarrot, c, r);
                 this.CEv[r, c] = new CCarota(r, c); 
             }
             PictureBox pRabbit;
-            for (int i = 0; i < 14; i++)
+            for (int i = 0; i < 1; i++)
             {
                 pRabbit = new PictureBox();
                 pRabbit.Image = Image.FromFile("C:/TGOL/rabbit.png");
@@ -50,7 +57,7 @@ namespace TheGameOfLife
                 this.CEv[r, c] = new CConiglio(r, c);
             }
             PictureBox pFox;
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 1; i++)
             {
                 pFox = new PictureBox();
                 pFox.Image = Image.FromFile("C:/TGOL/fox.png");
@@ -80,7 +87,6 @@ namespace TheGameOfLife
                 }
             }
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             //Controlla evento click
@@ -88,21 +94,28 @@ namespace TheGameOfLife
             {
                 space.MouseClick += new MouseEventHandler(clickOnSpace);
             }
+            foreach (Control control in Controls) // reflection to sort flickering.
+            {
+                typeof(Control).InvokeMember("DoubleBuffered",
+                    BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                    null, control, new object[] { true });
+            }
         }
         public void clickOnSpace(object sender, MouseEventArgs e)
         {
             int CimgSelected = table.GetColumn((PictureBox)sender);
             int RimgSelected = table.GetRow((PictureBox)sender);
             Where(RimgSelected, CimgSelected);
-            //MessageBox.Show(RimgSelected.ToString() + "," + CimgSelected.ToString());
+            MessageBox.Show(RimgSelected.ToString() + "," + CimgSelected.ToString());
         }
         private void Where(int r, int c)
         {
             Control img = table.GetControlFromPosition(c, r);
+            table.Controls.Remove(img);
             int r1 = GetRandomNumber(-2, 2);
             int c1 = GetRandomNumber(-2, 2);
-            r += r1;
-            c += c1;
+            r = r + r1;
+            c = c + c1;
             if(r<0)
             {
                 r = 0;

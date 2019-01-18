@@ -16,6 +16,7 @@ namespace TheGameOfLife
             abstract public void Muoversi();
             abstract public void GuadagnaVita();
             abstract public void PerdeVita();
+        abstract public void Vivi();
         }
         class CVolpe : CEsserevivente
         {
@@ -39,6 +40,11 @@ namespace TheGameOfLife
             {
             this.r = r;
             this.c = c;
+            }
+            public override void Vivi()
+            {
+            this.r = 4;
+            this.c = 4;
             }
             public override void Mangia()
             {
@@ -81,10 +87,19 @@ namespace TheGameOfLife
                 this.r = r;
                 this.c = c;
             }
+        public override void Vivi()
+        {
+            Scappa();
+            Mangia();
+        }
+        public void Scappa()
+        {
+            
+        }
         public override void Mangia()
-            {
-                throw new NotImplementedException();
-            }
+        {
+        
+        }
             public override void Muoversi()
             {
                 throw new NotImplementedException();
@@ -121,6 +136,11 @@ namespace TheGameOfLife
                 this.r = r;
                 this.c = c;
             }
+        public override void Vivi()
+        {
+            //Scappare dalla volpe
+            //E mangiare
+        }
         public override void PerdeVita()
             {
                 throw new NotImplementedException();

@@ -25,13 +25,12 @@ namespace TheGameOfLife
             ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            randomSpawn();
         }
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
-        public void randomSpawn()
+        public void creaCarota()
         {
             PictureBox pCarrot;
             for (int i = 0; i < 4; i++)
@@ -40,11 +39,11 @@ namespace TheGameOfLife
                 pCarrot.Image = Image.FromFile("C:/TGOL/carrot.png");
                 pCarrot.Size = new Size(table.Width / 4, table.Height / 4);
                 pCarrot.SizeMode = PictureBoxSizeMode.StretchImage;
-                //pCarrot.Enabled = false;
+                pCarrot.Tag = "Carota";
                 int r = GetRandomNumber(0, 4);
                 int c = GetRandomNumber(0, 4);
                 table.Controls.Add(pCarrot, c, r);
-                this.CEv[r, c] = new CCarota(r, c);
+                this.ogg[r, c] = new CCarota(r, c);
             }
         }
             /*
@@ -89,15 +88,17 @@ namespace TheGameOfLife
                 }
             }
             */
-            private void creaVolpe(CVolpe v)
+        private void creaVolpe(CVolpe v)
         {
             PictureBox pFox;
             pFox = new PictureBox();
             pFox.Image = Image.FromFile("C:/TGOL/fox.png");
             pFox.Size = new Size(table.Width / 4, table.Height / 4);
             pFox.SizeMode = PictureBoxSizeMode.StretchImage;
+            pFox.Tag = "Volpe";
+            pFox.Enabled = false;
             table.Controls.Add(pFox, v.c, v.r);
-            this.CEv[v.r, v.c] = new CVolpe(v.r, v.c);
+            this.ogg[v.r, v.c] = v;
         }
         private void creaConiglio(CConiglio c)
         {
@@ -106,8 +107,10 @@ namespace TheGameOfLife
             pRabbit.Image = Image.FromFile("C:/TGOL/rabbit.png");
             pRabbit.Size = new Size(table.Width / 4, table.Height / 4);
             pRabbit.SizeMode = PictureBoxSizeMode.StretchImage;
+            pRabbit.Tag = "Coniglio";
+            pRabbit.Enabled = true;
             table.Controls.Add(pRabbit, c.c, c.r);
-            this.CEv[c.r, c.c] = new CConiglio(c.r, c.c);
+            this.ogg[c.r, c.c] = c;
         }
         //Different random number from previous
         public static int GetRandomNumber(int min, int max)
@@ -119,6 +122,7 @@ namespace TheGameOfLife
         }
         private void button_Click(object sender, EventArgs e)
         {
+            BPlay.Enabled = false;
             CVolpe v1 = new CVolpe(GetRandomNumber(0, 4), GetRandomNumber(0, 4));
             ogg[v1.r, v1.c] = v1;
             creaVolpe(v1);
@@ -130,6 +134,7 @@ namespace TheGameOfLife
             ogg[c1.r, c1.c] = c1;
             CConiglio c2 = new CConiglio(GetRandomNumber(0, 4), GetRandomNumber(0, 4));
             creaConiglio(c2);
+            creaCarota();
             ogg[c2.r, c2.c] = c2;
             Thread T1 = new Thread(new ThreadStart(v1.Vivi));
             T1.Name = "volpe 1";
@@ -143,7 +148,10 @@ namespace TheGameOfLife
             T2.Start();
             T3.Start();
             T4.Start();
-
+            foreach (PictureBox space in this.table.Controls)
+            {
+                space.MouseClick += new MouseEventHandler(clickOnSpace);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -163,42 +171,96 @@ namespace TheGameOfLife
         public void clickOnSpace(object sender, MouseEventArgs e)
         {
             int CimgSelected = table.GetColumn((PictureBox)sender);
-            int RimgSelected = table.GetRow((PictureBox)sender);
-            MessageBox.Show(RimgSelected + "," + CimgSelected);
+            //Control control = table.GetControlFromPosition(CimgSelected, RimgSelected);
+            //MessageBox.Show(RimgSelected + "," + CimgSelected + " -- " + control.Tag.ToString());
+            //table.Controls.Remove(control);
+            //ogg[r, c] = null;
             //Where(RimgSelected, CimgSelected);
         }
-        private void Where(int r, int c)
+        private void Where()
         {
-            Control img = table.GetControlFromPosition(c, r);
-            table.Controls.Remove(img);
-            CEv[r, c] = null;
-            int r1 = GetRandomNumber(-1, 1);
-            int c1 = GetRandomNumber(-1, 1);
-            r = r + r1;
-            c = c + c1;
-            if (r < 0)
+            for (int r = 0; r < 5; r++)
             {
-                r = 0;
+                for (int c = 0; c < 5; c++)
+                {
+                    if (ogg[r, c] is CConiglio || ogg[r, c] is CVolpe)
+                    {
+                        int rprec = r;
+                        int cprec = c;
+                        Control img = table.GetControlFromPosition(c, r);
+                        table.Controls.Remove(img);
+                        ogg[r, c] = null;
+                        int[] r1 = {-1, 1};
+                        int[] c1 = { -1, 1 };
+                        int index = GetRandomNumber(0, 1);
+                        r = r + r1[index];
+                        index = GetRandomNumber(0, 1);
+                        c = c + c1[index];
+                        if(r == 0)
+                        {
+                            r = r + 1;
+                        }
+                        if(c == 0)
+                        {
+                            c = c + 1;
+                        }
+                        if (r == 4)
+                        {
+                            r = r - 1;
+                        }
+                        if (c == 4)
+                        {
+                            c = c - 1;
+                        }
+                        if (r < 0)
+                        {
+                            r = 0;
+                        }
+
+                        if (r > 5)
+                        {
+                            r = 4;
+                        }
+
+                        if (c < 0)
+                        {
+                            c = 0;
+                        }
+
+                        if (c > 5)
+                        {
+                            c = 4;
+                        }
+                        if (img.Tag.ToString() == "Volpe")
+                        {
+                            if (ogg[r, c] is CCarota || ogg[r, c] is CConiglio)
+                            {
+                                Control control = table.GetControlFromPosition(c, r);
+                                table.Controls.Remove(control);
+                                ogg[r, c] = null;
+                            }
+                            table.Controls.Add(img, c, r);
+                            ogg[r, c] = new CVolpe(r, c);
+                        }
+                        else
+                        {
+                            if (ogg[r, c] is CCarota || ogg[r,c] is CConiglio)
+                            {
+                                Control control = table.GetControlFromPosition(c, r);
+                                table.Controls.Remove(control);
+                                ogg[r, c] = null;
+                            }
+                            table.Controls.Add(img, c, r);
+                            ogg[r, c] = new CConiglio(r, c);
+                        } 
+                    }
+                }
             }
+        }
 
-            if (r > 10)
-            {
-                r = 10;
-            }
-
-            if (c < 0)
-            {
-                c = 0;
-
-            }
-
-            if (c > 10)
-            {
-                c = 10;
-            }
-
-            table.Controls.Add(img, c, r);
-            //CEv[r, c] = ;
+        private void Play_Click(object sender, EventArgs e)
+        {
+            Where();
         }
     }
 }

@@ -89,8 +89,12 @@ namespace TheGameOfLife
             }
         public override void Vivi()
         {
-            Scappa();
-            Mangia();
+            int i = 0;
+            while (i < 10)
+            {
+                Mangia();
+                i++;
+            }
         }
         public void Scappa()
         {
@@ -98,7 +102,7 @@ namespace TheGameOfLife
         }
         public override void Mangia()
         {
-        
+           
         }
             public override void Muoversi()
             {
